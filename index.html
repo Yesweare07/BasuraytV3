@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BASURAYT ♻️</title>
 
-  <!-- Correct file name -->
+  <!-- Correct CSS file -->
   <link rel="stylesheet" href="stylesheet.css">
 
   <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#8c6239">
 
-  <!-- iOS Support -->
+  <!-- iOS PWA Support -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Basurayt">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
 
   <style>
-    /* ✨ Logo Animation */
+    /* Logo animation */
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
       40% { transform: translateY(-20px); }
@@ -61,18 +61,39 @@
       font-weight: bold;
       transition: transform 0.2s ease;
     }
+
+    /* Premium floating button */
+    .premium-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1002;
+    }
+
+    .premium-float button {
+      background: linear-gradient(135deg, #f1c40f, #e67e22);
+      padding: 12px 18px;
+      border-radius: 22px;
+      font-size: 0.95rem;
+      color: white;
+      border: none;
+    }
   </style>
 </head>
 <body>
+
+  <!-- APP CONTAINER -->
   <div class="app">
     <img src="https://i.postimg.cc/1RJZFqPd/11.jpg" class="logo">
 
+    <!-- LOGIN -->
     <div id="login-section">
       <input type="text" id="username" placeholder="Enter your username">
       <input type="password" id="password" placeholder="Enter your password">
       <button id="login-btn">Login</button>
     </div>
 
+    <!-- CAMERA -->
     <div id="camera-section" style="display:none;">
       <video id="camera" autoplay playsinline></video>
       <button id="capture">📷 Scan Object</button>
@@ -82,18 +103,78 @@
     </div>
   </div>
 
-  <!-- SIDEBARS (unchanged) -->
-  <!-- (Your sidebar HTML stays exactly the same — no errors found) -->
+  <!-- RIGHT SIDE ACTION BUTTONS -->
+  <div class="sidebar-buttons">
+    <button id="toggle-scoreboard">📊</button>
+    <button id="toggle-howto">📘</button>
+    <button id="toggle-wastetrack">🚮</button>
+    <button id="toggle-premium">💎</button>
+  </div>
 
-  <!-- Load your JS file -->
+  <!-- SCOREBOARD SIDEBAR -->
+  <div id="scoreboard" class="sidebar">
+    <div class="sidebar-header">
+      <h2>🏆 Scoreboard</h2>
+      <button class="close-btn" data-target="scoreboard">✖</button>
+    </div>
+    <ul id="score-list"></ul>
+  </div>
+
+  <!-- HOW TO USE SIDEBAR -->
+  <div id="howto" class="sidebar">
+    <div class="sidebar-header">
+      <h2>📘 How to Use BASURAYT</h2>
+      <button class="close-btn" data-target="howto">✖</button>
+    </div>
+    <ul>
+      <li>1️⃣ Enter username & password then click Login.</li>
+      <li>2️⃣ Allow camera access.</li>
+      <li>3️⃣ Tap Scan to detect waste type.</li>
+      <li>4️⃣ Earn points.</li>
+      <li>5️⃣ View Scoreboard.</li>
+      <li>6️⃣ View Waste Track.</li>
+      <li>7️⃣ Reset anytime.</li>
+    </ul>
+  </div>
+
+  <!-- WASTE TRACK SIDEBAR -->
+  <div id="wastetrack" class="sidebar">
+    <div class="sidebar-header">
+      <h2>🚮 Waste Track</h2>
+      <button class="close-btn" data-target="wastetrack">✖</button>
+    </div>
+    <ul id="waste-list"></ul>
+  </div>
+
+  <!-- PREMIUM SIDEBAR -->
+  <div id="premium" class="sidebar">
+    <div class="sidebar-header">
+      <h2>💎 Premium Features</h2>
+      <button class="close-btn" data-target="premium">✖</button>
+    </div>
+
+    <ul>
+      <li>⭐ Double scan points</li>
+      <li>🌿 Eco Tips</li>
+      <li>🎁 Rewards</li>
+    </ul>
+
+    <p id="premium-status">Premium: OFF</p>
+  </div>
+
+  <!-- PREMIUM FLOAT BUTTON -->
+  <div class="premium-float">
+    <button id="activate-premium">🔓 Activate Premium</button>
+  </div>
+
+  <!-- MAIN JS -->
   <script src="javascript.js"></script>
 
-  <!-- Register Service Worker -->
+  <!-- SERVICE WORKER -->
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js")
-        .then(() => console.log("Service Worker Registered"))
-        .catch(err => console.log("SW Reg Failed", err));
+        .then(() => console.log("Service Worker Registered"));
     }
   </script>
 
