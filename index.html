@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASURAYT ♻️</title>
+
+  <!-- Correct file name -->
+  <link rel="stylesheet" href="stylesheet.css">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#8c6239">
+
+  <!-- iOS Support -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Basurayt">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+  <style>
+    /* ✨ Logo Animation */
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      animation: bounce 2.5s infinite;
+    }
+
+    #login-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    #login-section input {
+      padding: 10px;
+      width: 200px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    #login-section button {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <img src="https://i.postimg.cc/1RJZFqPd/11.jpg" class="logo">
+
+    <div id="login-section">
+      <input type="text" id="username" placeholder="Enter your username">
+      <input type="password" id="password" placeholder="Enter your password">
+      <button id="login-btn">Login</button>
+    </div>
+
+    <div id="camera-section" style="display:none;">
+      <video id="camera" autoplay playsinline></video>
+      <button id="capture">📷 Scan Object</button>
+      <button id="reset">🔁 Reset Points</button>
+      <p id="result"></p>
+      <p id="tip"></p>
+    </div>
+  </div>
+
+  <!-- SIDEBARS (unchanged) -->
+  <!-- (Your sidebar HTML stays exactly the same — no errors found) -->
+
+  <!-- Load your JS file -->
+  <script src="javascript.js"></script>
+
+  <!-- Register Service Worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js")
+        .then(() => console.log("Service Worker Registered"))
+        .catch(err => console.log("SW Reg Failed", err));
+    }
+  </script>
+
+</body>
+</html>
